@@ -1,14 +1,19 @@
-const px2rem = require('postcss-px2rem');
 module.exports = {
   css: {
-    loderOptions: {
+    loaderOptions: {
+      // 向预处理器 Loader 传递配置选项
+      less: {
+        // 配置less（其他样式解析用法一致）
+        javascriptEnabled: true // 设置为true
+      },
+      css: {},
       postcss: {
         plugins: [
-          px2rem({
-            remUnit: 75
+          require("postcss-px2rem")({
+            remUnit: 37.5
           })
         ]
       }
     }
-  }
-}
+  },
+};
