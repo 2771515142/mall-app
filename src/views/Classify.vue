@@ -1,13 +1,40 @@
 <template>
-  <div>商品分类页</div>
+  <div class="classify-wrapper">
+    <div class="search-btn">
+      <van-icon name="search" />
+      <div>苹果特价 1元1斤</div>
+    </div>
+    <one-tab></one-tab>
+  </div>
 </template>
 
 <script>
-export default {
+import oneTab from '../components/OneTab.vue';
 
+export default {
+  components: {
+    oneTab,
+  },
 };
 </script>
 
-<style>
-
+<style lang="less" scoped>
+  .classify-wrapper{
+    width:750px;
+    .search-btn{
+      width:710px;
+      height:33px;
+      line-height:33px;
+      background:#eee;
+      margin:11px auto;
+      border-radius:10px;
+      font-size:14px;
+      text-align:center;
+      color:#a1a1a1;
+      >*{
+        display:inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
 </style>
