@@ -20,9 +20,9 @@ export default {
 
 <style lang="less" scoped>
   .classify-wrapper{
-    width:750px;
+    width:375px;
     .search-btn{
-      width:710px;
+      width:355px;
       height:33px;
       line-height:33px;
       background:#eee;

@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   data() {
     return {
@@ -110,6 +112,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['getSideList']),
     scrollTo(i, e) {
       if (this.move) {
         return;
@@ -122,6 +125,8 @@ export default {
       const wrapperWidth = oneTab.offsetWidth;
 
       this.moveTo(oneTab.scrollLeft, itemWith / 2 + itemLeft - wrapperWidth / 2);
+      // 获取侧边栏数据
+      this.getSideList(this.menuList[i].title);
     },
     moveTo(start, end) {
       let dis = 0;
