@@ -31,6 +31,7 @@ export default {
       font-size:14px;
       text-align:center;
       color:#a1a1a1;
+      margin-bottom:0;
       >*{
         display:inline-block;
         vertical-align: middle;

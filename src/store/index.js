@@ -16,7 +16,7 @@ export default new Vuex.Store({
   actions: {
     async getSideList({ commit }, type) {
       const value = await api.getSideList(type);
-      commit('setSideList', []);
+      commit('setSideList', value);
       console.log(value);
     },
   },
