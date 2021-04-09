@@ -14,11 +14,7 @@ request.interceptors.response.use((value) => value.data);
 // 获取侧边导航的接口
 const getSideList = (type) => request.get(
   URLS.getSide,
-  {
-    params: {
-      type,
-    },
-  },
+  { params: { type } },
 );
 
 export default {

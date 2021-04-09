@@ -20,12 +20,13 @@ export default {
     return {
       move: false,
       index: 0,
-      sideList: [],
     };
   },
-  ...mapState({
-    sideList: (state) => state.sideList,
-  }),
+  computed: {
+    ...mapState({
+      sideList: (state) => state.sideList,
+    }),
+  },
   methods: {
     scrollTo(i, e) {
       if (this.move) {
