@@ -16,7 +16,17 @@ const getSideList = (type) => request.get(
   URLS.getSide,
   { params: { type } },
 );
+// 获取商品列表的接口
+const getGoodsList = (type, size, sort, page) => request.get(
+  URLS.getGoodsList,
+  {
+    params: {
+      type, size, sort, page,
+    },
+  },
+);
 
 export default {
   getSideList,
+  getGoodsList,
 };

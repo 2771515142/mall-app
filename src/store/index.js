@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     sideList: [],
     showContent: false,
+    size: 5,
   },
   mutations: {
     setSideList(state, list) {
@@ -23,6 +24,10 @@ export default new Vuex.Store({
       const value = await api.getSideList(type);
       commit('setSideList', value);
       commit('setShowContent', true);
+    },
+    async getGoodsList({ state }, options) {
+      const { type, sortType, page } = options;
+      const value = await api.getGoodsList(type, state.size, sortType, page);
       console.log(value);
     },
   },
