@@ -44,6 +44,9 @@ export default {
       this.getGoodsList({ type: this.sideList[i], sortType: 'all', page: 1 });
     },
   },
+  mounted() {
+    this.getGoodsList({ type: this.sideList[0], sortType: 'all', page: 1 });
+  },
 
 };
 
