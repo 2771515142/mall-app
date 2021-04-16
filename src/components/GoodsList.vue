@@ -21,6 +21,7 @@
             :finished="finished"
             finished-text="没有更多了"
             @load="onLoad"
+            :immediate-check = "false"
           >
             <goods-card
             v-for = "item in goodsList"
@@ -34,7 +35,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions, mapMutations, mapState } from 'vuex';
 import goodsCard from './GoodsCard.vue';
 
 export default {
@@ -44,6 +45,7 @@ export default {
       isLoading: false,
       loading: false,
       finished: false,
+      page: 1,
     };
   },
   computed: {
@@ -55,11 +57,26 @@ export default {
     console.log(this.goodsList);
   },
   methods: {
+    ...mapMutations(['resetGoodsList']),
+    ...mapActions(['getGoodsList']),
     onRefresh() {
-
+      this.loading = false;
+      this.finished = false;
+      this.isLoading = true;
+      this.page = 1;
+      this.resetGoodsList();
+      this.getGoodsList({ page: 1, sortType: this.type });
+      this.isLoading = false;
     },
-    onLoad() {
-
+    async onLoad() {
+      this.page += 1;
+      this.loading = true;
+      const result = await this.getGoodsList({ page: this.page, sortType: this.type });
+      if (result) {
+        this.loading = false;
+      } else {
+        this.finished = true;
+      }
     },
     changeType(type) {
       if (type === 'all') {
@@ -123,5 +140,16 @@ export default {
     .price-down::after {
       border-top-color:#ff1a90;
     }
+  }
+  .list-content{
+    width:296px;
+    position:fixed;
+    top:170px;
+    right:0;
+    bottom:50px;
+    overflow:auto;
+  }
+  .van-pull-refresh{
+    overflow: unset !important;
   }
 </style>

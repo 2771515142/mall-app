@@ -9,7 +9,7 @@
       <div class="tags">
         <div v-for="i in tags" :key="i">{{ i }}</div>
       </div>
-      <div class="prices">{{ price }}</div>
+      <div class="prices">¥{{ price }}</div>
     </div>
   </div>
 </template>
@@ -21,13 +21,13 @@ export default {
 </script>
 
 <style lang="less">
-  .card-warpper{
+  .card-wrapper{
     width:100%;
     display:flex;
     height:100px;
     .card-img{
       width:90px;
-      margin-left:20px;
+      margin-right: 20px;
       img{
         width:90px;
         height:90px;
@@ -60,6 +60,12 @@ export default {
           border-radius:3px;
           margin-right:5px;
         }
+      }
+      .prices{
+        color:#ff1a90;
+        font-size:14px;
+        font-weight:600;
+        margin-top:4px;
       }
     }
   }
