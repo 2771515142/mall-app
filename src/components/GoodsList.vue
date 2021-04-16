@@ -22,7 +22,11 @@
             finished-text="没有更多了"
             @load="onLoad"
           >
-            <goods-card></goods-card>
+            <goods-card
+            v-for = "item in goodsList"
+            :key = "item.id"
+            v-bind = "item"
+            ></goods-card>
           </van-list>
       </van-pull-refresh>
     </div>
@@ -46,6 +50,9 @@ export default {
     ...mapState({
       goodsList: (state) => state.goodsList,
     }),
+  },
+  mounted() {
+    console.log(this.goodsList);
   },
   methods: {
     onRefresh() {
