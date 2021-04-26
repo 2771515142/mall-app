@@ -27,6 +27,7 @@
             v-for = "item in goodsList"
             :key = "item.id"
             v-bind = "item"
+            :num = "counterMap[item.id]"
             ></goods-card>
           </van-list>
       </van-pull-refresh>
@@ -51,6 +52,7 @@ export default {
   computed: {
     ...mapState({
       goodsList: (state) => state.goodsList,
+      counterMap: (state) => state.counterMap,
     }),
   },
   mounted() {
@@ -88,6 +90,7 @@ export default {
       } else {
         this.type = 'price-up';
       }
+      this.onRefresh();
     },
   },
   components: {

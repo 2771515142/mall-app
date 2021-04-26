@@ -1,7 +1,7 @@
 <template>
   <div class="card-wrapper van-hairline--bottom">
     <div class="card-img">
-      <img :src="images[0]" />
+      <img :src="images[0]" ref="img"/>
     </div>
     <div class="card-content">
       <div class="title overflow-hidden">{{ title }}</div>
@@ -10,13 +10,53 @@
         <div v-for="i in tags" :key="i">{{ i }}</div>
       </div>
       <div class="prices">¥{{ price }}</div>
+      <div class="counter">
+        <div @touchend="counter(id, -1)" v-if="num">
+          <img src="https://duyi-bucket.oss-cn-beijing.aliyuncs.com/img/rec.png">
+        </div>
+        <div class="num" v-if="num"> {{ num }} </div>
+        <div @touchend="counter(id, 1)">
+          <img src="https://duyi-bucket.oss-cn-beijing.aliyuncs.com/img/add.png">
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+import Animate from '../tools/animate';
+
 export default {
-  props: ['images', 'title', 'desc', 'tags', 'price'],
+  props: ['images', 'title', 'desc', 'tags', 'price', 'id', 'num'],
+  methods: {
+    ...mapMutations(['storageChange']),
+    counter(id, num) {
+      this.storageChange({ id, value: num });
+      if (num === -1) {
+        return;
+      }
+      // 图片的位置
+      const { top, left } = this.$refs.img.getBoundingClientRect();
+      const { offsetWidth: imgWidth, offsetHeight: imgHeight } = this.$refs.img;
+      const shopCar = document.getElementById('shop-car');
+      // 购物车的位置
+      const { left: carX, top: carY } = shopCar.getBoundingClientRect();
+      // 购物车的宽高
+      const { offsetWidth: carWidth, offsetHeight: carHeight } = shopCar;
+      const endX = carX + carWidth / 2;
+      const endY = carY + carHeight / 2;
+      Animate({
+        startX: left,
+        startY: top,
+        endX,
+        endY,
+        src: this.$refs.img.src,
+        width: imgWidth,
+        height: imgHeight,
+      });
+    },
+  },
 };
 </script>
 
@@ -66,6 +106,26 @@ export default {
         font-size:14px;
         font-weight:600;
         margin-top:4px;
+      }
+      .counter{
+        position:absolute;
+        bottom:12px;
+        right:15px;
+        display:flex;
+        justify-content: flex-end;
+        align-items: center;
+        > div:not(.num){
+          width:16px;
+          height:16px;
+          img{
+            width:100%
+          }
+        }
+        .num{
+            padding:0 5px;
+            height:22px;
+            line-height:22px;
+          }
       }
     }
   }
