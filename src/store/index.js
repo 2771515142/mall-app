@@ -22,7 +22,7 @@ export default new Vuex.Store({
           Vue.set(state.counterMap, id, state.counterMap[id] + value);
         }
       } else {
-        Vue.set(state.counterMap, id, state.counterMap[id] + value);
+        Vue.set(state.counterMap, id, value);
       }
 
       localStorage.setItem('goods', JSON.stringify(state.counterMap));

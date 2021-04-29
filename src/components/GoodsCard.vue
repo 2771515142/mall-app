@@ -33,9 +33,7 @@ export default {
     ...mapMutations(['storageChange']),
     counter(id, num) {
       this.storageChange({ id, value: num });
-      if (num === -1) {
-        return;
-      }
+
       // 图片的位置
       const { top, left } = this.$refs.img.getBoundingClientRect();
       const { offsetWidth: imgWidth, offsetHeight: imgHeight } = this.$refs.img;
