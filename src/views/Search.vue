@@ -15,7 +15,12 @@
           <div @touchend="onSearch(value)">搜索</div>
         </template>
         <template #action v-else>
-          <van-icon name="cart-o" id="shop-car" />
+          <van-icon
+          name="cart-o"
+          id="shop-car"
+          class="shop-car"
+          :badge="badge"
+          />
         </template>
       </van-search>
     </div>
@@ -32,7 +37,7 @@
         </van-cell>
       </van-list>
     </div>
-    <div class="goods-list" v-if="showList">
+    <div class="goods-list" v-if="!showList">
       <van-list
             v-model="loading"
             :finished="finished"
@@ -75,13 +80,22 @@ export default {
     ...mapState({
       counterMap: (state) => state.counterMap,
     }),
+    badge() {
+      const count = Object.values(this.counterMap).reduce((prev, next) => prev + next, 0);
+      if (count > 99) {
+        return '99+';
+      }
+      return count;
+    },
   },
   methods: {
 
     async onLoad() {
+      this.showList = false;
       const value = await this.$api.search(this.value, this.page, this.size);
       this.goodsList = [...this.goodsList, ...value.list];
       this.total = value.total;
+      this.loading = false;
       if (this.goodsList.length >= this.total) {
         this.finished = true;
       } else {
@@ -95,9 +109,11 @@ export default {
         this.value = this.place;
       }
       this.likeList = [];
+      this.goodsList = [];
       this.page = 1;
       this.finished = false;
       this.onLoad();
+      this.showList = false;
     },
     // 防抖
     async input() {
@@ -118,7 +134,7 @@ export default {
       }
     },
     focus() {
-
+      this.showList = true;
     },
   },
   components: {
@@ -148,6 +164,9 @@ export default {
       }
       .search-content{
         flex:1;
+        .shop-car{
+          font-size:15px;
+        }
       }
     }
     .like-search{
