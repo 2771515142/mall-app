@@ -33,26 +33,27 @@ export default {
     ...mapMutations(['storageChange']),
     counter(id, num) {
       this.storageChange({ id, value: num });
-
-      // 图片的位置
-      const { top, left } = this.$refs.img.getBoundingClientRect();
-      const { offsetWidth: imgWidth, offsetHeight: imgHeight } = this.$refs.img;
-      const shopCar = document.getElementById('shop-car');
-      // 购物车的位置
-      const { left: carX, top: carY } = shopCar.getBoundingClientRect();
-      // 购物车的宽高
-      const { offsetWidth: carWidth, offsetHeight: carHeight } = shopCar;
-      const endX = carX + carWidth / 2;
-      const endY = carY + carHeight / 2;
-      Animate({
-        startX: left,
-        startY: top,
-        endX,
-        endY,
-        src: this.$refs.img.src,
-        width: imgWidth,
-        height: imgHeight,
-      });
+      if (num === 1) {
+        // 图片的位置
+        const { top, left } = this.$refs.img.getBoundingClientRect();
+        const { offsetWidth: imgWidth, offsetHeight: imgHeight } = this.$refs.img;
+        const shopCar = document.getElementById('shop-car');
+        // 购物车的位置
+        const { left: carX, top: carY } = shopCar.getBoundingClientRect();
+        // 购物车的宽高
+        const { offsetWidth: carWidth, offsetHeight: carHeight } = shopCar;
+        const endX = carX + carWidth / 2;
+        const endY = carY + carHeight / 2;
+        Animate({
+          startX: left,
+          startY: top,
+          endX,
+          endY,
+          src: this.$refs.img.src,
+          width: imgWidth,
+          height: imgHeight,
+        });
+      }
     },
   },
 };
