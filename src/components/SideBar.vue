@@ -47,8 +47,8 @@ export default {
     },
   },
   mounted() {
-    this.resetGoodsList();
-    this.getGoodsList({ type: this.sideList[0], sortType: 'all', page: 1 });
+    // this.resetGoodsList();
+    // this.getGoodsList({ type: this.sideList[0], sortType: 'all', page: 1 });
   },
 
 };
