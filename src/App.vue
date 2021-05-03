@@ -24,7 +24,6 @@ export default {
       }
       if (this.$router.back) {
         this.transitionName = 'right';
-        console.log(this.transitionName);
       } else {
         this.transitionName = 'left';
       }

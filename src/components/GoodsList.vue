@@ -56,7 +56,7 @@ export default {
     }),
   },
   mounted() {
-    console.log(this.goodsList);
+    // console.log(this.goodsList);
   },
   methods: {
     ...mapMutations(['resetGoodsList']),
